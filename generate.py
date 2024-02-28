@@ -7,8 +7,6 @@ import rdkit.Chem as Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem.Descriptors import ExactMolWt
 from rdkit.Chem.Crippen import MolLogP
-from rdkit.Chem.rdMolDescriptors import CalcNumHBD
-from rdkit.Chem.rdMolDescriptors import CalcTPSA
 from rdkit.Chem.rdMolDescriptors import CalcNumAromaticRings
 from rdkit.Chem.rdMolDescriptors import CalcNumHeteroatoms
 from rdkit.Chem.rdMolDescriptors import CalcNumAliphaticRings
@@ -49,7 +47,7 @@ def generate(args, vocab, char):
     if ((args.use_parent_prop) and (smiles_string is not None)):
         m = Chem.MolFromSmiles(smiles_string)
         AllChem.Compute2DCoords(m)
-        args.target_props = f'{ExactMolWt(m)} {MolLogP(m)} {CalcTPSA(m)} {CalcNumHBD(m)} {CalcNumHeteroatoms(m)} {CalcNumAromaticRings(m)} {CalcNumAliphaticRings(m)}'
+        args.target_props = string_mol_properties(m)
     elif (args.use_parent_prop) and (smiles_string is None):
         raise TypeError('Smile string is not provided')
 
