@@ -46,15 +46,13 @@ def generate(args, vocab, char):
                 )
     model.restore(args.checkpoint)
 
-    print(args.target_props)
-    print(args.use_parent_prop, type(args.use_parent_prop))
     if ((args.use_parent_prop) and (smiles_string is not None)):
         m = Chem.MolFromSmiles(smiles_string)
         AllChem.Compute2DCoords(m)
         args.target_props = f'{ExactMolWt(m)} {MolLogP(m)} {CalcTPSA(m)} {CalcNumHBD(m)} {CalcNumHeteroatoms(m)} {CalcNumAromaticRings(m)} {CalcNumAliphaticRings(m)}'
     elif (args.use_parent_prop) and (smiles_string is None):
         raise TypeError('Smile string is not provided')
-    print(args.target_props)
+
     target_prop = np.array([[float(p) for p in args.target_props.split()] for _ in range(args.batch_size)])
     start_codon = np.array([np.array(list(map(vocab.get, 'X')))for _ in range(args.batch_size)])
 
