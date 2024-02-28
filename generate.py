@@ -33,6 +33,7 @@ parser.add_argument('--lr', help='learning rate', type=float, default=0.0001)
 parser.add_argument('--device', help='device for train, CPU or GPU', type=str, default='GPU')
 parser.add_argument('--vocab_path', help='path to vocab', type=str, default='vocab.pkl')
 parser.add_argument('--chars_path', help='path to chars', type=str, default='chars.pkl')
+parser.add_argument('--checkpoint', help='path to chekpoint', type=str, default='../drive/MyDrive/cvae_tf/model_7props5.ckpt-5')
 args = parser.parse_args()
 
 def generate(args, vocab, char):
@@ -42,6 +43,7 @@ def generate(args, vocab, char):
     model = CVAE(vocab_size,
                 args
                 )
+    model.restore(args.checkpoint)
     if (args.use_parent_prop) and (smiles_string is not None):
         m = Chem.MolFromSmiles(smiles_string)
         AllChem.Compute2DCoords(m)
