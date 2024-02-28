@@ -20,6 +20,7 @@ parser.add_argument('--smiles', help='smiles of molecule', type=str, default=Non
 parser.add_argument('--use_parent_prop', help='use properties of parent molecule', type=bool, default=True)
 parser.add_argument('--target_props', help='target properties', type=str, default='150 1 12 1 1 0 0')
 parser.add_argument('--num_prop', help='number of properties', type=int, default=7)
+parser.add_argument('--num_iter', help='number of rnn layer', type=int, default=200)
 parser.add_argument('--batch_size', help='batch_size', type=int, default=1)
 parser.add_argument('--latent_size', help='latent_size', type=int, default=200)
 parser.add_argument('--unit_size', help='unit_size of rnn cell', type=int, default=512)
