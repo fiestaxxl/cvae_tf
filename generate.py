@@ -17,7 +17,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--smiles', help='smiles of molecule', type=str, default=None)
-parser.add_argument('--use_parent_prop', help='use properties of parent molecule', type=bool, default=True)
+parser.add_argument('--use_parent_prop', help='use properties of parent molecule', action='store_true')
 parser.add_argument('--target_props', help='target properties', type=str, default='150 1 12 1 1 0 0')
 parser.add_argument('--num_prop', help='number of properties', type=int, default=7)
 parser.add_argument('--num_iter', help='number of rnn layer', type=int, default=200)
