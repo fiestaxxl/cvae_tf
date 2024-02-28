@@ -85,5 +85,5 @@ with tf.device(f'/device:{args.device}:0'):
       if epoch==0:
           print ('epoch\ttrain_loss\ttest_loss\ttime (s)')
       print (f"{epoch}\t{np.round(train_loss,3)}\t{np.round(test_loss,3)}\t{np.round(out,3)}")
-      ckpt_path = args.save_dir+'/model_7props'+str(epoch)+'.ckpt'
+      ckpt_path = args.save_dir+'/model_9props'+str(epoch)+'.ckpt'
       model.save(ckpt_path, epoch)

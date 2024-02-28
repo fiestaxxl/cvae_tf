@@ -4,11 +4,25 @@ from rdkit import Chem
 import pickle
 import os
 
+from rdkit.Chem.Descriptors import ExactMolWt
+from rdkit.Chem.Crippen import MolLogP
+from rdkit.Chem.rdMolDescriptors import CalcNumAromaticRings
+from rdkit.Chem.rdMolDescriptors import CalcNumHeteroatoms
+from rdkit.Chem.rdMolDescriptors import CalcNumAliphaticRings
+from rdkit.Chem.Fragments import fr_NH2, fr_ArN, fr_azo, fr_nitrile
+
 def smiles2vec(smile_string, vocab, args):
   length = len(smile_string)+1
   vec = [('X'+smile_string).ljust(args.seq_length, 'E')]
   vec = np.array([np.array(list(map(vocab.get, s)))for s in vec])
   return vec, length
+
+def string_mol_properties(m):
+    '''
+    computes properties of m
+    return: str, MW LogP NumHetAtoms NumAromRings NumAliphaticRings RNH2 ArN Azo CN
+    '''
+    return f'{ExactMolWt(m)} {MolLogP(m)} {CalcNumHeteroatoms(m)} {CalcNumAromaticRings(m)} {CalcNumAliphaticRings(m)} {fr_NH2(m)} {fr_ArN(m)} {fr_azo(m)} {fr_nitrile(m)}'
 
 
 def convert_to_smiles(vector, char):

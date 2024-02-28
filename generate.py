@@ -82,10 +82,10 @@ def generate(args, vocab, char):
         filename = args.target_props + 'random' + '.txt'
 
     with open(filename, 'w') as w:
-        w.write('smiles\tMW\tLogP\tTPSA\tHBD\tNumHetAtoms\tNumAromRings\tNumAliphRings\n')
+        w.write('smiles\tMW\tLogP\tNumHetAtoms\tNumAromRings\tNumAliphaticRings\tRNH2\tArN\tAzo\tCN\n')
         for m in ms:
             try:
-                w.write('%s\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\n' %(Chem.MolToSmiles(m), ExactMolWt(m), MolLogP(m), CalcTPSA(m), CalcNumHBD(m), CalcNumHeteroatoms(m), CalcNumAromaticRings(m), CalcNumAliphaticRings(m)))
+                w.write('%s\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\n' %(Chem.MolToSmiles(m), ExactMolWt(m), MolLogP(m), CalcNumHeteroatoms(m), CalcNumAromaticRings(m), CalcNumAliphaticRings(m), fr_NH2(m), fr_ArN(m), fr_azo(m), fr_nitrile(m)))
             except:
                 continue
     #return ms
