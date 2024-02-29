@@ -22,7 +22,7 @@ parser.add_argument('--stddev', help='stddev of VAE', type=float, default=1.0)
 parser.add_argument('--num_epochs', help='epochs', type=int, default=6)
 parser.add_argument('--lr', help='learning rate', type=float, default=0.0001)
 parser.add_argument('--num_prop', help='number of properties', type=int, default=9)
-parser.add_argument('--save_dir', help='save dir', type=str, default='../drive/MyDrive/cvae_tf/')
+parser.add_argument('--save_dir', help='save dir', type=str, default='../drive/MyDrive/cvae_tf')
 parser.add_argument('--device', help='device for train, CPU or GPU', type=str, default='GPU')
 args = parser.parse_args()
 

@@ -83,7 +83,7 @@ def generate(args, vocab, char):
         w.write('smiles\tMW\tLogP\tNumHetAtoms\tNumAromRings\tNumAliphaticRings\tRNH2\tArN\tAzo\tCN\n')
         for m in ms:
             try:
-                w.write('%s\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\n' %(Chem.MolToSmiles(m), ExactMolWt(m), MolLogP(m), CalcNumHeteroatoms(m), CalcNumAromaticRings(m), CalcNumAliphaticRings(m), fr_NH2(m), fr_ArN(m), fr_azo(m), fr_nitrile(m)))
+                w.write('%s\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\n' %(Chem.MolToSmiles(m), ExactMolWt(m), MolLogP(m), CalcNumHeteroatoms(m), CalcNumAromaticRings(m), CalcNumAliphaticRings(m), fr_NH2(m), fr_ArN(m), fr_azo(m), fr_nitrile(m)))
             except:
                 continue
     #return ms

@@ -33,5 +33,5 @@ w = open(args.output_filename, 'w')
 for d in data:
     if d is None:
         continue
-    w.write(d[0] + '\t' + str(d[1]) + '\t'+ str(d[2]) + '\t'+ str(d[3]) + '\t'+ str(d[4])+ '\t'+ str(d[5])+ '\t'+ str(d[6]) + '\t'+ str(d[7])+'\n')
+    w.write(d[0] + '\t' + str(d[1]) + '\t'+ str(d[2]) + '\t'+ str(d[3]) + '\t'+ str(d[4])+ '\t'+ str(d[5])+ '\t'+ str(d[6]) + '\t'+ str(d[7])+'\t'+ str(d[8])+'\t'+ str(d[9])+'\n')
 w.close()
