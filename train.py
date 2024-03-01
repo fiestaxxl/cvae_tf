@@ -21,7 +21,7 @@ parser.add_argument('--mean', help='mean of VAE', type=float, default=0.0)
 parser.add_argument('--stddev', help='stddev of VAE', type=float, default=1.0)
 parser.add_argument('--num_epochs', help='epochs', type=int, default=6)
 parser.add_argument('--lr', help='learning rate', type=float, default=0.0001)
-parser.add_argument('--num_prop', help='number of properties', type=int, default=9)
+parser.add_argument('--num_prop', help='number of properties', type=int, default=8)
 parser.add_argument('--save_dir', help='save dir', type=str, default='../drive/MyDrive/cvae_tf')
 parser.add_argument('--device', help='device for train, CPU or GPU', type=str, default='GPU')
 args = parser.parse_args()
@@ -85,5 +85,5 @@ with tf.device(f'/device:{args.device}:0'):
       if epoch==0:
           print ('epoch\ttrain_loss\ttest_loss\ttime (s)')
       print (f"{epoch}\t{np.round(train_loss,3)}\t{np.round(test_loss,3)}\t{np.round(out,3)}")
-      ckpt_path = args.save_dir+'/model_9props'+str(epoch)+'.ckpt'
+      ckpt_path = args.save_dir+'/model_8props'+str(epoch)+'.ckpt'
       model.save(ckpt_path, epoch)
