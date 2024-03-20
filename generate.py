@@ -10,15 +10,15 @@ from rdkit.Chem.Crippen import MolLogP
 from rdkit.Chem.rdMolDescriptors import CalcNumAromaticRings
 from rdkit.Chem.rdMolDescriptors import CalcNumHeteroatoms
 from rdkit.Chem.rdMolDescriptors import CalcNumAliphaticRings
-from rdkit.Chem.Fragments import fr_NH2, fr_Ar_N, fr_pyridine
+from rdkit.Chem.Fragments import fr_NH2, fr_Ar_N, fr_pyridine, fr_isocyan
 
 import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--smiles', help='smiles of molecule', type=str, default=None)
 parser.add_argument('--use_parent_prop', help='use properties of parent molecule', action='store_true')
-parser.add_argument('--target_props', help='target properties', type=str, default='150 1 12 1 1 0 0')
-parser.add_argument('--num_prop', help='number of properties', type=int, default=8)
+parser.add_argument('--target_props', help='target properties', type=str, default='150 1 12 1 1 0 0 0')
+parser.add_argument('--num_prop', help='number of properties', type=int, default=9)
 parser.add_argument('--num_iter', help='number of rnn layer', type=int, default=200)
 parser.add_argument('--batch_size', help='batch_size', type=int, default=1)
 parser.add_argument('--latent_size', help='latent_size', type=int, default=200)
@@ -33,7 +33,7 @@ parser.add_argument('--lr', help='learning rate', type=float, default=0.0001)
 parser.add_argument('--device', help='device for train, CPU or GPU', type=str, default='GPU')
 parser.add_argument('--vocab_path', help='path to vocab', type=str, default='vocab.pkl')
 parser.add_argument('--chars_path', help='path to chars', type=str, default='chars.pkl')
-parser.add_argument('--checkpoint', help='path to chekpoint', type=str, default='../drive/MyDrive/cvae_tf/model_7props5.ckpt-5')
+parser.add_argument('--checkpoint', help='path to chekpoint', type=str, default='../drive/MyDrive/cvae_tf/model_9props5.ckpt-5')
 args = parser.parse_args()
 
 def generate(args, vocab, char):
@@ -81,10 +81,10 @@ def generate(args, vocab, char):
         filename = args.target_props + 'random' + '.txt'
 
     with open(filename, 'w') as w:
-        w.write('smiles\tMW\tLogP\tNumHetAtoms\tNumAromRings\tNumAliphaticRings\tRNH2\tAr_N\tPyr\n')
+        w.write('smiles\tMW\tLogP\tNumHetAtoms\tNumAromRings\tNumAliphaticRings\tRNH2\tAr_N\tPyr\tCyan\n')
         for m in ms:
             try:
-                w.write('%s\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\n' %(Chem.MolToSmiles(m), ExactMolWt(m), MolLogP(m), CalcNumHeteroatoms(m), CalcNumAromaticRings(m), CalcNumAliphaticRings(m), fr_NH2(m), fr_Ar_N(m), fr_pyridine(m)))
+                w.write('%s\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\n' %(Chem.MolToSmiles(m), ExactMolWt(m), MolLogP(m), CalcNumHeteroatoms(m), CalcNumAromaticRings(m), CalcNumAliphaticRings(m), fr_NH2(m), fr_Ar_N(m), fr_pyridine(m),fr_isocyan(m)))
             except:
                 continue
     #return ms
