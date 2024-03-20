@@ -3,7 +3,7 @@ from rdkit.Chem.Crippen import MolLogP
 from rdkit.Chem.rdMolDescriptors import CalcNumAromaticRings
 from rdkit.Chem.rdMolDescriptors import CalcNumHeteroatoms
 from rdkit.Chem.rdMolDescriptors import CalcNumAliphaticRings
-from rdkit.Chem.Fragments import fr_NH2, fr_Ar_N, fr_pyridine
+from rdkit.Chem.Fragments import fr_NH2, fr_Ar_N, fr_pyridine, fr_isocyan
 
 from rdkit import Chem
 from multiprocessing import Pool
@@ -18,7 +18,7 @@ args = parser.parse_args()
 def cal_prop(s):
     m = Chem.MolFromSmiles(s)
     if m is None : return None
-    return Chem.MolToSmiles(m), ExactMolWt(m), MolLogP(m), CalcNumHeteroatoms(m), CalcNumAromaticRings(m), CalcNumAliphaticRings(m), fr_NH2(m), fr_Ar_N(m), fr_pyridine(m)
+    return Chem.MolToSmiles(m), ExactMolWt(m), MolLogP(m), CalcNumHeteroatoms(m), CalcNumAromaticRings(m), CalcNumAliphaticRings(m), fr_NH2(m), fr_Ar_N(m), fr_pyridine(m), fr_isocyan(m)
 
 with open(args.input_filename) as f:
     smiles = f.read().split('\n')[:-1]
@@ -33,5 +33,5 @@ w = open(args.output_filename, 'w')
 for d in data:
     if d is None:
         continue
-    w.write(d[0] + '\t' + str(d[1]) + '\t'+ str(d[2]) + '\t'+ str(d[3]) + '\t'+ str(d[4])+ '\t'+ str(d[5])+ '\t'+ str(d[6]) + '\t'+ str(d[7])+'\t'+ str(d[8])+'\n')
+    w.write(d[0] + '\t' + str(d[1]) + '\t'+ str(d[2]) + '\t'+ str(d[3]) + '\t'+ str(d[4])+ '\t'+ str(d[5])+ '\t'+ str(d[6]) + '\t'+ str(d[7])+'\t'+ str(d[8])+'\t'+ str(d[9])+'\n')
 w.close()
