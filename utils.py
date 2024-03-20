@@ -9,7 +9,7 @@ from rdkit.Chem.Crippen import MolLogP
 from rdkit.Chem.rdMolDescriptors import CalcNumAromaticRings
 from rdkit.Chem.rdMolDescriptors import CalcNumHeteroatoms
 from rdkit.Chem.rdMolDescriptors import CalcNumAliphaticRings
-from rdkit.Chem.Fragments import fr_NH2, fr_Ar_N, fr_pyridine
+from rdkit.Chem.Fragments import fr_NH2, fr_Ar_N, fr_pyridine, fr_isocyan
 
 def smiles2vec(smile_string, vocab, args):
   length = len(smile_string)+1
@@ -20,9 +20,9 @@ def smiles2vec(smile_string, vocab, args):
 def string_mol_properties(m):
     '''
     computes properties of m
-    return: str, MW LogP NumHetAtoms NumAromRings NumAliphaticRings RNH2 Ar_N Pyr
+    return: str, MW LogP NumHetAtoms NumAromRings NumAliphaticRings RNH2 Ar_N Pyr Cyan
     '''
-    return f'{ExactMolWt(m)} {MolLogP(m)} {CalcNumHeteroatoms(m)} {CalcNumAromaticRings(m)} {CalcNumAliphaticRings(m)} {fr_NH2(m)} {fr_Ar_N(m)} {fr_pyridine(m)}'
+    return f'{ExactMolWt(m)} {MolLogP(m)} {CalcNumHeteroatoms(m)} {CalcNumAromaticRings(m)} {CalcNumAliphaticRings(m)} {fr_NH2(m)} {fr_Ar_N(m)} {fr_pyridine(m)} {fr_isocyan(m)}'
 
 
 def convert_to_smiles(vector, char):
